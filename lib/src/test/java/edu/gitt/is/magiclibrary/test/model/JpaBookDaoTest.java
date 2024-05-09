@@ -101,7 +101,13 @@ class JpaBookDaoTest {
 	@Test
 	@DisplayName("Verifica el m�todo para buscar por identificador")
 	final void testFindById() {
-		fail("Not yet implemented"); // TODO
+		log.info("Entro en el m�todo para probar el m�todo findById");
+		log.info("Persisto el libro 1 "+book1);
+		undertest.save(book1);
+		
+		Optional<Book> book = undertest.findById(book1.getId());
+		
+		assertTrue(book.isPresent(),"Error en buscar libro por id");
 	}
 
 	/**
@@ -180,7 +186,17 @@ class JpaBookDaoTest {
 	@Test
 	@DisplayName("Verifica el m�todo para actualizar los datos de un libro")
 	final void testUpdate() {
-		fail("Not yet implemented"); // TODO
+		log.info("Entro en el m�todo para probar el m�todo update()");
+		log.info("Persisto el libro 1 "+book1);
+		undertest.save(book1);
+		
+		book1.setName("joszampul");
+		
+		undertest.update(book1);
+		
+		Optional<Book> recuperado = undertest.findById(book1.getId());	
+		
+		assertEquals(recuperado.get().getName(), book1.getName(),"Error al actualizar campos de un libro");
 	}
 
 	/**
@@ -213,7 +229,15 @@ class JpaBookDaoTest {
 	 */
 	@Test
 	final void testDeleteLong() {
-		fail("Not yet implemented"); // TODO
+		log.info("Entro en el m�todo para probar el m�todo delete(String id)");
+		log.info("Persisto el libro 1 "+book1);
+		undertest.save(book1);
+		
+		undertest.delete(book1.getId());
+		
+		Optional<Book> recuperado = undertest.findById(book1.getId());	
+		
+		assertFalse(recuperado.isPresent(),"Error en borrar libro dado un id");
 	}
 
 	/**
