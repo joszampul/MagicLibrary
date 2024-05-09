@@ -21,16 +21,17 @@ import edu.gitt.is.magiclibrary.model.JpaBookDao;
 import edu.gitt.is.magiclibrary.model.entities.Book;
 import edu.gitt.is.magiclibrary.model.entities.Item;
 
+//Commit para verificar push de joszampul
 
 /**
  * 
  * <p>Test para probar JpaBookDao, clase para manejar los libros de la biblioteca</p>
- * <p>La clase Book ya está disponible y se usa en este test</p>
- * @author Isabel Román
+ * <p>La clase Book ya estï¿½ disponible y se usa en este test</p>
+ * @author Isabel Romï¿½n
  */
 class JpaBookDaoTest {
 	/**
-	 * Para trazar el código {@link java.util.logging}
+	 * Para trazar el cï¿½digo {@link java.util.logging}
 	 */
 	private static final Logger log = Logger.getLogger(JpaBookDaoTest.class.getName());
 	
@@ -50,14 +51,14 @@ class JpaBookDaoTest {
 		  log.info("--------------------------Entro en setUpBeforeClass---------------");
 		  undertest = new JpaBookDao();
 		  log.info("JpaBookDao bajo test creado");
-		  book1 = new Book("Ingeniería del Software","Ian Sommerville", new Date(111,0,1), "miisbn", 500);
+		  book1 = new Book("Ingenierï¿½a del Software","Ian Sommerville", new Date(111,0,1), "miisbn", 500);
 		  log.info("Libro 1 creado: "+book1);
-		  book2 = new Book("Ingeniería del Software: un enfoque práctico","Ian Roger S. Pressman", new Date(110,0,1), "otroisbn", 200);
+		  book2 = new Book("Ingenierï¿½a del Software: un enfoque prï¿½ctico","Ian Roger S. Pressman", new Date(110,0,1), "otroisbn", 200);
 		  log.info("Libro 2 creado: "+book2);
 		  /**
 		   * este libro es el mismo que el primero, para algunas pruebas de replicados
 		   */
-		  book11 = new Book("Ingeniería del Software","Ian Sommerville", new Date(111,0,1), "miisbn", 500);
+		  book11 = new Book("Ingenierï¿½a del Software","Ian Sommerville", new Date(111,0,1), "miisbn", 500);
 		  log.info("Libro 1 replicado: "+book11);
 		  
 		 }
@@ -80,8 +81,8 @@ class JpaBookDaoTest {
 
 	/**
 	 * {@link org.junit.jupiter.api.AfterEach}
-	 * <p>Cada test parte de la misma situación en la BBDD, dos libros y ningún ejemplar</p>
-	 * <p>Como los test pueden añadir ejemplares para comenzar otro hay que eliminar los ejemplares previamente</p>
+	 * <p>Cada test parte de la misma situaciï¿½n en la BBDD, dos libros y ningï¿½n ejemplar</p>
+	 * <p>Como los test pueden aï¿½adir ejemplares para comenzar otro hay que eliminar los ejemplares previamente</p>
 	 * @throws Exception
 	 */
     @AfterEach
@@ -90,7 +91,7 @@ class JpaBookDaoTest {
     	List<Book> books = undertest.findAll();
     	books.forEach(book->undertest.delete(book));
     	books = undertest.findAll();
-    	assertTrue(books.size()==0,"Debería haber borrado todos los libros, pero hay "+books.size());
+    	assertTrue(books.size()==0,"Deberï¿½a haber borrado todos los libros, pero hay "+books.size());
     }
 
 	/**
@@ -98,7 +99,7 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica el método para buscar por identificador")
+	@DisplayName("Verifica el mï¿½todo para buscar por identificador")
 	final void testFindById() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -108,9 +109,9 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica el método para buscar todos")
+	@DisplayName("Verifica el mï¿½todo para buscar todos")
 	final void testFindAll() {
-		log.info("Entro en el método para probar el método findAll");
+		log.info("Entro en el mï¿½todo para probar el mï¿½todo findAll");
 		log.info("Persisto el libro 1 "+book1);
 		undertest.save(book1);
 		
@@ -129,9 +130,9 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica la introducción de un libro por primera vez")
+	@DisplayName("Verifica la introducciï¿½n de un libro por primera vez")
 	final void testSave() {
-		log.info("Entro en el método para probar el método save");
+		log.info("Entro en el mï¿½todo para probar el mï¿½todo save");
 		undertest.save(book1);
 		log.info("Persisto "+book1);
 		
@@ -143,7 +144,7 @@ class JpaBookDaoTest {
 			log.info("Recupero "+recuperado);
 		
 			assertEquals(recuperado.get().getAuthor(),"Ian Sommerville");
-			assertEquals(recuperado.get().getName(),"Ingeniería del Software");
+			assertEquals(recuperado.get().getName(),"Ingenierï¿½a del Software");
 			assertEquals(recuperado.get().getPages(),500);
 			assertEquals(recuperado.get().getPublishedAt(),new Date(111,0,1));
 			assertEquals(recuperado.get().getIsbn(),"miisbn");	
@@ -158,13 +159,13 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica que la aplicación no permite almacenar dos libros con los mismos datos")
+	@DisplayName("Verifica que la aplicaciï¿½n no permite almacenar dos libros con los mismos datos")
 	final void testResave() {
-		log.info("Entro en el método para probar que el método save asegura que no se duplica");
+		log.info("Entro en el mï¿½todo para probar que el mï¿½todo save asegura que no se duplica");
 		undertest.save(book1);
 		log.info("Persisto "+book1);
 		undertest.save(book11);
-		log.info("Persisto la réplica "+book11);
+		log.info("Persisto la rï¿½plica "+book11);
 	
 		
 		List<Book> books = undertest.findAll();
@@ -177,7 +178,7 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica el método para actualizar los datos de un libro")
+	@DisplayName("Verifica el mï¿½todo para actualizar los datos de un libro")
 	final void testUpdate() {
 		fail("Not yet implemented"); // TODO
 	}
@@ -187,22 +188,22 @@ class JpaBookDaoTest {
 	 * {@link org.junit.jupiter.api.Test}
 	 */
 	@Test
-	@DisplayName("Verifica el método para eliminar un libro")
+	@DisplayName("Verifica el mï¿½todo para eliminar un libro")
 	final void testDeleteBook() {
-		log.info("Entro en el método para probar el método delete");
+		log.info("Entro en el mï¿½todo para probar el mï¿½todo delete");
 		
 		undertest.save(book1);
 		log.info("Persisto "+book1);
 		Optional<Book> recuperado = undertest.findById(book1.getId());	
 		if(recuperado.isPresent()){
-			log.info("El libro está, lo voy a eliminar");		
+			log.info("El libro estï¿½, lo voy a eliminar");		
 			
 			undertest.delete(recuperado.get());
 		}else {
 			fail("No se ha recuperado bien el libro");
 		}
 		recuperado = undertest.findById(book1.getId());	
-		assertFalse(recuperado.isPresent(),"El libro lo había borrado, no puedo recuperarlo");
+		assertFalse(recuperado.isPresent(),"El libro lo habï¿½a borrado, no puedo recuperarlo");
 			
 	}
 
@@ -221,9 +222,9 @@ class JpaBookDaoTest {
 	 */
 	
 	@Test
-	@DisplayName("Verifica el método para buscar por autor")
+	@DisplayName("Verifica el mï¿½todo para buscar por autor")
 	final void testFindBookByAuthor() {
-		log.info("Entro en el método para probar el método findBookByAuthor");
+		log.info("Entro en el mï¿½todo para probar el mï¿½todo findBookByAuthor");
 		
 		undertest.save(book1);
 		log.info("Persisto "+book1);
